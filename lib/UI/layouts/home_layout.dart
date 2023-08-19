@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -21,7 +23,7 @@ class HomeLayoutState extends State<HomeLayout> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
 
-    if (screenWidth < 600) {
+    if (screenWidth < 830) {
       showActions = false;
     } else {
       showActions = true;
@@ -79,7 +81,7 @@ class HomeLayoutState extends State<HomeLayout> {
                       },
                       onExit: (_) {
                         setState(() {
-                          if (screenWidth >= 600) {
+                          if (screenWidth >= 830) {
                             showActions =
                                 true; // Solo establecer showActions en true en pantallas grandes.
                           }
@@ -110,7 +112,12 @@ class HomeLayoutState extends State<HomeLayout> {
             child: Column(
               children: [
                 widget.child,
+                
                 const AboutView(),
+                const SizedBox(
+            height: 50,
+          ),
+          
                 const ProyectsView()
           
               ],
@@ -121,9 +128,7 @@ class HomeLayoutState extends State<HomeLayout> {
 }
 
 class _ButtomCV extends StatelessWidget {
-  const _ButtomCV({
-    super.key,
-  });
+  const _ButtomCV();
 
   @override
   Widget build(BuildContext context) {

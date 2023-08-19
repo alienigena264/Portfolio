@@ -19,6 +19,10 @@ class ProyectsView extends StatelessWidget {
                   color: textColor, fontWeight: FontWeight.w700, fontSize: 50),
             )),
           ),
+          const SizedBox(
+            height: 20,
+          ),
+          
         const Wrap(
                 children: [
                   CardProyects('ChazaUNapp', 'assets/chazaUNapp.webp', 'https://'),
