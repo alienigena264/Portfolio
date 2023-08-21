@@ -8,30 +8,40 @@ class ProyectsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Column(
+    return Column(
       children: [
         FittedBox(
-            fit: BoxFit.cover,
-            child: Center(
-                child: Text(
-              'Proyects',
-              style: GoogleFonts.roboto(
-                  color: textColor, fontWeight: FontWeight.w700, fontSize: 50),
-            )),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          
+          fit: BoxFit.cover,
+          child: Center(
+              child: Text(
+            'Proyects',
+            style: GoogleFonts.roboto(
+                color: textColor, fontWeight: FontWeight.w700, fontSize: 50),
+          )),
+        ),
+        const SizedBox(
+          height: 20,
+        ),
         const Wrap(
-                children: [
-                  CardProyects('ChazaUNapp', 'assets/chazaUNapp.webp', 'https://'),
-                  CardProyects(
-                      'Admin DashBoard', 'assets/chazaUNapp.webp', 'https://'),
-                  CardProyects('MrGarciaApp', 'assets/chazaUNapp.webp', 'https://'),
-                  CardProyects('ChazaUNapp', 'assets/chazaUNapp.webp', 'https://'),
-                ],
-              
+          children: [
+            CardProjects(
+                titleProject: 'ChazaUNapp',
+                urlImage: 'assets/chazaUNapp.webp',
+                urlRepository: 'https://'),
+            CardProjects(
+                titleProject: 'AdminDashBoard',
+                urlImage: 'assets/chazaUNapp.webp',
+                urlRepository: 'https://'),
+            CardProjects(
+                titleProject: 'MrGarciaApp',
+                urlImage: 'assets/chazaUNapp.webp',
+                urlRepository: 'https://'),
+            CardProjects(
+                titleProject: 'ChazaUNapp',
+                urlImage: 'assets/chazaUNapp.webp',
+                urlRepository: 'https://'
+            ),
+          ],
         ),
       ],
     );
