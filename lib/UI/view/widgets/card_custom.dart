@@ -110,8 +110,7 @@ class BuildActionButtons extends StatelessWidget {
                   context: context,
                   builder: (BuildContext context) {
                     //TODO: Agregar el url del video
-                    return
-                    BuildAlertDialog(
+                    return BuildAlertDialog(
                       description: description,
                       tittle: titleProject,
                       urlVideo: '',
@@ -193,13 +192,13 @@ class BuildAlertDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title:  Text(
+      title: Text(
         tittle,
         style: const TextStyle(fontSize: 35, color: primaryColor),
       ),
-      content: SingleChildScrollView(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 500, maxHeight: 700),
+      content: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 500, maxHeight: 700),
+        child: SingleChildScrollView(
           child: Column(
             children: [
               Container(
@@ -214,7 +213,6 @@ class BuildAlertDialog extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              
               Text(description,
                   style: GoogleFonts.roboto(
                     color: Colors.black,
