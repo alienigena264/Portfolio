@@ -3,6 +3,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:newton_particles/newton_particles.dart';
 import 'package:portafolio/UI/view/about_view.dart';
 import 'package:portafolio/UI/view/proyects_view.dart';
 import 'package:portafolio/UI/view/theme/colors.dart';
@@ -38,91 +39,119 @@ class HomeLayoutState extends State<HomeLayout> {
           end: Alignment.bottomCenter,
         ),
       ),
-      child: Scaffold(
-          appBar: AppBar(
-            shadowColor: Colors.transparent,
-            backgroundColor: backgroundColor,
-            elevation: 0,
-            actions: showActions
-                ? [
-                    _AppBarButtoms(
-                      onPressed: () {},
-                      text: 'About Me',
-                    ),
+      child: Stack(
+        children: [
+          Newton(
+            // Add any kind of effects to your UI
+            // For example:
+            activeEffects: [
+              RainEffect(
+                particleConfiguration: ParticleConfiguration(
+                  shape: CircleShape(),
+                  size: const Size(5, 5),
+                  color:  LinearInterpolationParticleColor(
+                    colors: [primaryColor.withOpacity(0.5), secundaryColor],
+                  ),
+                ),
+                effectConfiguration: const EffectConfiguration(
+                  particlesPerEmit: 3,
+                  emitDuration: 500,
+                  minDuration: 4000,
+                  maxDuration: 7000,
+                  minFadeOutThreshold: 0,
+                  maxFadeOutThreshold: 0.9,
+                  minBeginScale: 0.40,
+                  maxBeginScale: 0.70,
+                  minEndScale: 0.10,
+                  maxEndScale: 0.50,
+                ),
+              )
+            ],
+          ),
+          Scaffold(
+              appBar: AppBar(
+                shadowColor: Colors.transparent,
+                backgroundColor: backgroundColor,
+                elevation: 0,
+                actions: showActions
+                    ? [
+                        _AppBarButtoms(
+                          onPressed: () {},
+                          text: 'About Me',
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        _AppBarButtoms(
+                          onPressed: () {},
+                          text: 'Proyects',
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        _AppBarButtoms(
+                          onPressed: () {},
+                          text: 'Skills',
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        _AppBarButtoms(
+                          onPressed: () {},
+                          text: 'Contact',
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        MouseRegion(
+                          onEnter: (_) {
+                            setState(() {
+                              showAnimated = true;
+                            });
+                          },
+                          onExit: (_) {
+                            setState(() {
+                              if (screenWidth >= 830) {
+                                showActions =
+                                    true; // Solo establecer showActions en true en pantallas grandes.
+                              }
+                              showAnimated = false; // Ocultar la animación.
+                              print('das');
+                            });
+                          },
+                          child: showAnimated
+                              ? ElasticIn(child: const _ButtomCV())
+                              : const _ButtomCV(),
+                        )
+                      ]
+                    : [
+                        IconButton(
+                            onPressed: () {
+                              setState(() {
+                                showActions = true;
+                              });
+                            },
+                            icon: const Icon(
+                              Icons.menu,
+                              color: textColor,
+                            )),
+                      ],
+              ),
+              backgroundColor: Colors.transparent,
+              body: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    widget.child,
+                    const AboutView(),
                     const SizedBox(
-                      width: 20,
+                      height: 50,
                     ),
-                    _AppBarButtoms(
-                      onPressed: () {},
-                      text: 'Proyects',
-                    ),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    _AppBarButtoms(
-                      onPressed: () {},
-                      text: 'Skills',
-                    ),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    _AppBarButtoms(
-                      onPressed: () {},
-                      text: 'Contact',
-                    ),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    MouseRegion(
-                      onEnter: (_) {
-                        setState(() {
-                          showAnimated = true;
-                        });
-                      },
-                      onExit: (_) {
-                        setState(() {
-                          if (screenWidth >= 830) {
-                            showActions =
-                                true; // Solo establecer showActions en true en pantallas grandes.
-                          }
-                          showAnimated = false; // Ocultar la animación.
-                          print('das');
-                        });
-                      },
-                      child: showAnimated
-                          ? ElasticIn(child: const _ButtomCV())
-                          : const _ButtomCV(),
-                    )
-                  ]
-                : [
-                    IconButton(
-                        onPressed: () {
-                          setState(() {
-                            showActions = true;
-                          });
-                        },
-                        icon: const Icon(
-                          Icons.menu,
-                          color: textColor,
-                        )),
+                    const ProyectsView()
                   ],
-          ),
-          backgroundColor: Colors.transparent,
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                widget.child,
-                
-                const AboutView(),
-                const SizedBox(
-            height: 50,
-          ),
-          
-                const ProyectsView()
-          
-              ],
-            ),
-          )),
+                ),
+              )),
+        ],
+      ),
     );
   }
 }

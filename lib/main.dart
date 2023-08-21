@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return   const MaterialApp(
-      title: 'Material App',
+      title: 'Juan Garcia | Mobile developer',
       debugShowCheckedModeBanner: false,
       home:  HomeLayout(child: HomeView(),)
 
