@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../theme/colors.dart';
 
@@ -93,6 +95,7 @@ class BuildActionButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Uri url = Uri.parse('https://github.com/alienigena264/Portfolio');
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Wrap(
@@ -100,7 +103,7 @@ class BuildActionButtons extends StatelessWidget {
           BuildTextButton(
               text: 'Ver Repositorio',
               onPressed: () {
-                // Agrega aquí la lógica para abrir el repositorio
+                launchUrl(url);
               }),
           const SizedBox(width: 10),
           BuildElevatedButton(
@@ -113,7 +116,6 @@ class BuildActionButtons extends StatelessWidget {
                     return BuildAlertDialog(
                       description: description,
                       tittle: titleProject,
-                      urlVideo: '',
                     );
                   },
                 );
@@ -179,37 +181,29 @@ class BuildElevatedButton extends StatelessWidget {
 }
 
 class BuildAlertDialog extends StatelessWidget {
-  const BuildAlertDialog(
-      {Key? key,
-      required this.tittle,
-      required this.description,
-      required this.urlVideo})
-      : super(key: key);
+  const BuildAlertDialog({
+    Key? key,
+    required this.tittle,
+    required this.description,
+  }) : super(key: key);
   final String tittle;
   final String description;
-  final String urlVideo;
 
   @override
   Widget build(BuildContext context) {
+    double titleFontSize = MediaQuery.of(context).size.width < 500 ? 24 : 35;
+
     return AlertDialog(
       title: Text(
         tittle,
-        style: const TextStyle(fontSize: 35, color: primaryColor),
+        style: TextStyle(fontSize: titleFontSize, color: primaryColor),
       ),
       content: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 500, maxHeight: 700),
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
-                width: 450,
-                height: 320,
-                decoration: BoxDecoration(
-                  color: backgroundColor,
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: backgroundColor, width: 0),
-                ),
-              ),
+              PlayerCustomVideo(),
               const SizedBox(
                 height: 20,
               ),
@@ -228,14 +222,47 @@ class BuildAlertDialog extends StatelessWidget {
       ),
       actions: [
         Padding(
-          padding: const EdgeInsets.only(right: 20, bottom: 5),
-          child: BuildElevatedButton(
-              text: "Cerrar",
-              onPressed: () {
-                Navigator.of(context).pop();
-              }),
+          padding: const EdgeInsets.only(right: 20),
+          child: FittedBox(
+            fit: BoxFit.fitWidth,
+            child: BuildElevatedButton(
+                text: "Cerrar",
+                onPressed: () {
+                  Navigator.of(context).pop();
+                }),
+          ),
         ),
       ],
+    );
+  }
+}
+
+class PlayerCustomVideo extends StatelessWidget {
+  PlayerCustomVideo({
+    super.key,
+  });
+
+// If the requirement is just to play a single video.
+  final _controller = YoutubePlayerController.fromVideoId(
+    videoId: 'JwsgCnBLL4A',
+    autoPlay: false,
+    params: const YoutubePlayerParams(showFullscreenButton: true),
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 500,
+      height: 300,
+      decoration: BoxDecoration(
+        color: backgroundColor,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: backgroundColor, width: 0),
+      ),
+      child: YoutubePlayer(
+        controller: _controller,
+        aspectRatio: 16 / 9,
+      ),
     );
   }
 }

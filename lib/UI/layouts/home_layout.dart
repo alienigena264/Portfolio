@@ -54,7 +54,7 @@ class HomeLayoutState extends State<HomeLayout> {
                   ),
                 ),
                 effectConfiguration: const EffectConfiguration(
-                  particlesPerEmit: 3,
+                  particlesPerEmit: 5,
                   emitDuration: 500,
                   minDuration: 4000,
                   maxDuration: 7000,
