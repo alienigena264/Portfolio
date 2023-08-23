@@ -18,8 +18,18 @@ class HomeLayout extends StatefulWidget {
 }
 
 class HomeLayoutState extends State<HomeLayout> {
+  final ScrollController _scrollController = ScrollController();
   bool showActions = true;
-  bool showAnimated = false;
+  bool showAnimatedCV = false;
+  bool showAnimatedAbout = false;
+  bool showAnimatedProyects = false;
+  static const double positionAbout = 0.0;
+  static const double positionProyects =
+      100.0; // Ajusta esta posición según tu diseño
+  static const double positionSkills =
+      200.0; // Ajusta esta posición según tu diseño
+  static const double positionContact =
+      400.0; // Ajusta esta posición según tu diseño
 
   @override
   Widget build(BuildContext context) {
@@ -75,28 +85,36 @@ class HomeLayoutState extends State<HomeLayout> {
                 actions: showActions
                     ? [
                         _AppBarButtoms(
-                          onPressed: () {},
+                          onPressed: () {
+                            _scrollToPosition(positionAbout);
+                          },
                           text: 'About Me',
                         ),
                         const SizedBox(
                           width: 20,
                         ),
                         _AppBarButtoms(
-                          onPressed: () {},
+                          onPressed: () {
+                            _scrollToPosition(positionProyects);
+                          },
                           text: 'Proyects',
                         ),
                         const SizedBox(
                           width: 20,
                         ),
                         _AppBarButtoms(
-                          onPressed: () {},
+                          onPressed: () {
+                            _scrollToPosition(positionSkills);
+                          },
                           text: 'Skills',
                         ),
                         const SizedBox(
                           width: 20,
                         ),
                         _AppBarButtoms(
-                          onPressed: () {},
+                          onPressed: () {
+                            _scrollToPosition(positionContact);
+                          },
                           text: 'Contact',
                         ),
                         const SizedBox(
@@ -105,7 +123,7 @@ class HomeLayoutState extends State<HomeLayout> {
                         MouseRegion(
                           onEnter: (_) {
                             setState(() {
-                              showAnimated = true;
+                              showAnimatedCV = true;
                             });
                           },
                           onExit: (_) {
@@ -114,11 +132,11 @@ class HomeLayoutState extends State<HomeLayout> {
                                 showActions =
                                     true; // Solo establecer showActions en true en pantallas grandes.
                               }
-                              showAnimated = false; // Ocultar la animación.
+                              showAnimatedCV = false; // Ocultar la animación.
                               print('das');
                             });
                           },
-                          child: showAnimated
+                          child: showAnimatedCV
                               ? ElasticIn(child: const _ButtomCV())
                               : const _ButtomCV(),
                         )
@@ -137,20 +155,82 @@ class HomeLayoutState extends State<HomeLayout> {
                       ],
               ),
               backgroundColor: Colors.transparent,
-              body: SingleChildScrollView(
-                child: Column(
+              body: Scrollbar(
+                
+                child: ListView(
+                  physics: const ClampingScrollPhysics(),
+                  
+                  controller:
+                      _scrollController,
+                  scrollDirection: Axis.vertical, // Asigna el controlador al ScrollView
                   children: [
+                    ElevatedButton(
+                        onPressed: () {
+                          _scrollToPosition(800);
+                        },
+                        child: const Text('Mover a 800')),
                     widget.child,
-                    const AboutView(),
                     const SizedBox(
                       height: 50,
                     ),
-                    const ProyectsView()
+                    _mouseRegionAbout(),
+                    const SizedBox(
+                      height: 100,
+                    ),
+                    _mouseRegionProyects(),
                   ],
+                  
                 ),
               )),
         ],
       ),
+    );
+  }
+
+  void _scrollToPosition(double offset) {
+    _scrollController.animateTo(
+      offset,
+      duration: const Duration(seconds: 1),
+      curve: Curves.easeInOut,
+    );
+  }
+
+  MouseRegion _mouseRegionProyects() {
+    return MouseRegion(
+      onEnter: (_) {
+        setState(() {
+          showAnimatedProyects = true;
+        });
+      },
+      child: showAnimatedProyects
+          ? ZoomIn(
+              duration: const Duration(milliseconds: 400),
+              child: const ProyectsView(
+                opacity: 1,
+              ))
+          : const SizedBox(
+              width: double.infinity, child: ProyectsView(opacity: 0)),
+    );
+  }
+
+  MouseRegion _mouseRegionAbout() {
+    return MouseRegion(
+      onEnter: (_) {
+        setState(() {
+          showAnimatedAbout = true;
+        });
+      },
+      child: showAnimatedAbout
+          ? ElasticIn(
+              duration: const Duration(milliseconds: 300),
+              child: const AboutView(
+                opacity: 1,
+              ))
+          : const SizedBox(
+              width: double.infinity,
+              child: AboutView(
+                opacity: 0,
+              )),
     );
   }
 }
@@ -198,7 +278,7 @@ class _AppBarButtoms extends StatelessWidget {
         style: ButtonStyle(
           overlayColor: MaterialStateProperty.all(primaryColor),
         ),
-        onPressed: () {},
+        onPressed: onPressed as void Function()?,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 300),
           child: Text(

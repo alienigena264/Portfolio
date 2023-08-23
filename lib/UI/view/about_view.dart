@@ -5,7 +5,8 @@ import 'package:portafolio/UI/view/theme/colors.dart';
 import 'package:portafolio/UI/view/widgets/titles_custom.dart';
 
 class AboutView extends StatelessWidget {
-  const AboutView({super.key});
+  const AboutView({super.key, required this.opacity});
+  final double opacity;
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +19,11 @@ class AboutView extends StatelessWidget {
       mobileMode = false;
     }
     return FadeInLeftBig(
-      duration: const Duration(milliseconds: 1000),
+      duration: const Duration(milliseconds: 800),
       child: _Atributes(
         mobileMode: mobileMode,
         screenWidth: screenWidth,
-        cros: CrossAxisAlignment.start,
+        cros: CrossAxisAlignment.start, opacity: opacity,
       ),
     );
   }
@@ -32,33 +33,37 @@ class _Atributes extends StatelessWidget {
   const _Atributes({
     required this.mobileMode,
     required this.screenWidth,
-    required this.cros,
+    required this.cros, required this.opacity,
   });
   final CrossAxisAlignment cros;
   final bool mobileMode;
   final double screenWidth;
+  final double opacity;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: cros,
-      children: [
-        TittlesCustom(text: 'About Me', mobileMode: mobileMode),
-        Padding(
-          padding: mobileMode
-              ? const EdgeInsets.symmetric(horizontal: 10)
-              : const EdgeInsets.symmetric(horizontal: 50.0),
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: screenWidth * 0.5),
-              child: Text(
-                  'I am a mobile developer, I have experience in the development of mobile applications with Flutter, I have knowledge in the development of web applications with Angular and I have knowledge in the development of backend with Nodejs',
-                  style: GoogleFonts.roboto(color: textColor, fontSize: 20)),
+    return Opacity(
+      opacity: opacity,
+      child: Column(
+        crossAxisAlignment: cros,
+        children: [
+          TittlesCustom(text: 'About Me', mobileMode: mobileMode),
+          Padding(
+            padding: mobileMode
+                ? const EdgeInsets.symmetric(horizontal: 10)
+                : const EdgeInsets.symmetric(horizontal: 50.0),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: screenWidth * 0.5),
+                child: Text(
+                    'I am a mobile developer, I have experience in the development of mobile applications with Flutter, I have knowledge in the development of web applications with Angular and I have knowledge in the development of backend with Nodejs',
+                    style: GoogleFonts.roboto(color: textColor, fontSize: 20)),
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
