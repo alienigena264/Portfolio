@@ -141,8 +141,7 @@ class HomeLayoutState extends State<HomeLayout> {
                 child: Column(
                   children: [
                     widget.child,
-
-                        const AboutView(),
+                    const AboutView(),
                     const SizedBox(
                       height: 50,
                     ),
@@ -167,7 +166,8 @@ class _ButtomCV extends StatelessWidget {
           overlayColor: MaterialStateProperty.all(primaryColor),
         ),
         onPressed: () {
-          launchUrl(Uri.parse('https://drive.google.com/file/d/1nIH8v0eGu1NvFRcbRdi-FKw2BwEJ0MFL/view?usp=sharing'));
+          launchUrl(Uri.parse(
+              'https://drive.google.com/file/d/1nIH8v0eGu1NvFRcbRdi-FKw2BwEJ0MFL/view?usp=sharing'));
         },
         child: Text(
           'View CV',
