@@ -11,11 +11,17 @@ class CardProjects extends StatelessWidget {
     required this.titleProject,
     required this.urlImage,
     required this.urlRepository,
+    required this.description,
+    required this.idVideo,
+    required this.technologies,
   }) : super(key: key);
 
   final String titleProject;
   final String urlImage;
   final String urlRepository;
+  final String description;
+  final String idVideo;
+  final List<String> technologies;
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +32,13 @@ class CardProjects extends StatelessWidget {
         children: [
           BuildTitle(titleProject: titleProject),
           const SizedBox(height: 20),
-          const BuildProjectImage(),
+          BuildProjectImage(urlImage: urlImage,),
           const SizedBox(height: 20),
           BuildActionButtons(
             urlRepository: urlRepository,
             titleProject: titleProject,
-            description:
-                'Este proyecto tiene como base ayudar a mejorar la administracion de puestos de ventas dentro de la universidad brindando a los dueños una forma facil de encontrar trabajadores, y a los estudiantes una forma sencilla para generar unos ingresos extras durante sus huecos en la universidad',
+            description: description,
+            idVideo: idVideo,
           ),
         ],
       ),
@@ -62,7 +68,8 @@ class BuildTitle extends StatelessWidget {
 }
 
 class BuildProjectImage extends StatelessWidget {
-  const BuildProjectImage({Key? key}) : super(key: key);
+  const BuildProjectImage({Key? key, required this.urlImage}) : super(key: key);
+  final String urlImage;
 
   @override
   Widget build(BuildContext context) {
@@ -76,6 +83,10 @@ class BuildProjectImage extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: backgroundColor, width: 0),
         ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: Image.network(urlImage, fit: BoxFit.fill)
+        ),
       ),
     );
   }
@@ -86,16 +97,18 @@ class BuildActionButtons extends StatelessWidget {
       {Key? key,
       required this.urlRepository,
       required this.titleProject,
-      required this.description})
+      required this.description,
+      required this.idVideo})
       : super(key: key);
 
   final String urlRepository;
   final String titleProject;
   final String description;
+  final String idVideo;
 
   @override
   Widget build(BuildContext context) {
-    final Uri url = Uri.parse('https://github.com/alienigena264/Portfolio');
+    final Uri url = Uri.parse(urlRepository);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Wrap(
@@ -116,6 +129,7 @@ class BuildActionButtons extends StatelessWidget {
                     return BuildAlertDialog(
                       description: description,
                       tittle: titleProject,
+                      idVideo: idVideo,
                     );
                   },
                 );
@@ -185,9 +199,11 @@ class BuildAlertDialog extends StatelessWidget {
     Key? key,
     required this.tittle,
     required this.description,
+    required this.idVideo,
   }) : super(key: key);
   final String tittle;
   final String description;
+  final String idVideo;
 
   @override
   Widget build(BuildContext context) {
@@ -203,7 +219,9 @@ class BuildAlertDialog extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              PlayerCustomVideo(),
+              PlayerCustomVideo(
+                idVideo: idVideo,
+              ),
               const SizedBox(
                 height: 20,
               ),
@@ -238,19 +256,21 @@ class BuildAlertDialog extends StatelessWidget {
 }
 
 class PlayerCustomVideo extends StatelessWidget {
-  PlayerCustomVideo({
+  const PlayerCustomVideo({
     super.key,
+    required this.idVideo,
   });
+  final String idVideo;
 
-// If the requirement is just to play a single video.
-  final _controller = YoutubePlayerController.fromVideoId(
-    videoId: 'JwsgCnBLL4A',
+  @override
+  Widget build(BuildContext context) {
+    // If the requirement is just to play a single video.
+  final controller = YoutubePlayerController.fromVideoId(
+    videoId: idVideo,
     autoPlay: false,
     params: const YoutubePlayerParams(showFullscreenButton: true),
   );
 
-  @override
-  Widget build(BuildContext context) {
     return Container(
       width: 500,
       height: 300,
@@ -260,7 +280,7 @@ class PlayerCustomVideo extends StatelessWidget {
         border: Border.all(color: backgroundColor, width: 0),
       ),
       child: YoutubePlayer(
-        controller: _controller,
+        controller: controller,
         aspectRatio: 16 / 9,
       ),
     );

@@ -7,6 +7,7 @@ import 'package:newton_particles/newton_particles.dart';
 import 'package:portafolio/UI/view/about_view.dart';
 import 'package:portafolio/UI/view/proyects_view.dart';
 import 'package:portafolio/UI/view/theme/colors.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeLayout extends StatefulWidget {
   const HomeLayout({super.key, required this.child});
@@ -42,14 +43,12 @@ class HomeLayoutState extends State<HomeLayout> {
       child: Stack(
         children: [
           Newton(
-            // Add any kind of effects to your UI
-            // For example:
             activeEffects: [
               RainEffect(
                 particleConfiguration: ParticleConfiguration(
                   shape: CircleShape(),
                   size: const Size(5, 5),
-                  color:  LinearInterpolationParticleColor(
+                  color: LinearInterpolationParticleColor(
                     colors: [primaryColor.withOpacity(0.5), secundaryColor],
                   ),
                 ),
@@ -142,7 +141,8 @@ class HomeLayoutState extends State<HomeLayout> {
                 child: Column(
                   children: [
                     widget.child,
-                    const AboutView(),
+
+                        const AboutView(),
                     const SizedBox(
                       height: 50,
                     ),
@@ -166,7 +166,9 @@ class _ButtomCV extends StatelessWidget {
           backgroundColor: MaterialStateProperty.all(auxColor.withAlpha(155)),
           overlayColor: MaterialStateProperty.all(primaryColor),
         ),
-        onPressed: () {},
+        onPressed: () {
+          launchUrl(Uri.parse('https://drive.google.com/file/d/1nIH8v0eGu1NvFRcbRdi-FKw2BwEJ0MFL/view?usp=sharing'));
+        },
         child: Text(
           'View CV',
           style: GoogleFonts.roboto(
