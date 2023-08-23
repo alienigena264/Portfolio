@@ -23,13 +23,13 @@ class HomeLayoutState extends State<HomeLayout> {
   bool showAnimatedCV = false;
   bool showAnimatedAbout = false;
   bool showAnimatedProyects = false;
-  static const double positionAbout = 0.0;
+  static const double positionAbout = 300;
   static const double positionProyects =
-      100.0; // Ajusta esta posición según tu diseño
+      850; // Ajusta esta posición según tu diseño
   static const double positionSkills =
-      200.0; // Ajusta esta posición según tu diseño
+      1200.0; // Ajusta esta posición según tu diseño
   static const double positionContact =
-      400.0; // Ajusta esta posición según tu diseño
+      1500.0; // Ajusta esta posición según tu diseño
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +86,8 @@ class HomeLayoutState extends State<HomeLayout> {
                     ? [
                         _AppBarButtoms(
                           onPressed: () {
-                            _scrollToPosition(positionAbout);
+                            _scrollToPosition(positionAbout,1);
+                            
                           },
                           text: 'About Me',
                         ),
@@ -95,7 +96,7 @@ class HomeLayoutState extends State<HomeLayout> {
                         ),
                         _AppBarButtoms(
                           onPressed: () {
-                            _scrollToPosition(positionProyects);
+                            _scrollToPosition(positionProyects,2);
                           },
                           text: 'Proyects',
                         ),
@@ -104,7 +105,7 @@ class HomeLayoutState extends State<HomeLayout> {
                         ),
                         _AppBarButtoms(
                           onPressed: () {
-                            _scrollToPosition(positionSkills);
+                            _scrollToPosition(positionSkills,2);
                           },
                           text: 'Skills',
                         ),
@@ -113,7 +114,7 @@ class HomeLayoutState extends State<HomeLayout> {
                         ),
                         _AppBarButtoms(
                           onPressed: () {
-                            _scrollToPosition(positionContact);
+                            _scrollToPosition(positionContact,2);
                           },
                           text: 'Contact',
                         ),
@@ -164,11 +165,6 @@ class HomeLayoutState extends State<HomeLayout> {
                       _scrollController,
                   scrollDirection: Axis.vertical, // Asigna el controlador al ScrollView
                   children: [
-                    ElevatedButton(
-                        onPressed: () {
-                          _scrollToPosition(800);
-                        },
-                        child: const Text('Mover a 800')),
                     widget.child,
                     const SizedBox(
                       height: 50,
@@ -187,7 +183,18 @@ class HomeLayoutState extends State<HomeLayout> {
     );
   }
 
-  void _scrollToPosition(double offset) {
+  void _scrollToPosition(double offset, int animar) {
+    
+    if (animar == 1) {
+      setState(() {
+        showAnimatedAbout = true;
+      });
+    } else if (animar == 2) {
+      setState(() {
+        showAnimatedAbout = true;
+        showAnimatedProyects = true;
+      });
+    }
     _scrollController.animateTo(
       offset,
       duration: const Duration(seconds: 1),
