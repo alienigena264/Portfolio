@@ -114,18 +114,17 @@ class BuildActionButtons extends StatelessWidget {
       child: Wrap(
         children: [
           BuildTextButton(
-              text: 'Ver Repositorio',
+              text: 'View repository',
               onPressed: () {
                 launchUrl(url);
               }),
           const SizedBox(width: 10),
           BuildElevatedButton(
-              text: 'Ver Proyecto',
+              text: 'View Project',
               onPressed: () {
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
-                    //TODO: Agregar el url del video
                     return BuildAlertDialog(
                       description: description,
                       tittle: titleProject,
@@ -244,7 +243,7 @@ class BuildAlertDialog extends StatelessWidget {
           child: FittedBox(
             fit: BoxFit.fitWidth,
             child: BuildElevatedButton(
-                text: "Cerrar",
+                text: "Close",
                 onPressed: () {
                   Navigator.of(context).pop();
                 }),

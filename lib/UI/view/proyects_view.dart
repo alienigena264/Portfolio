@@ -33,7 +33,7 @@ class ProyectsView extends StatelessWidget {
                     'https://images.unsplash.com/photo-1550330562-b055aa030d73?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bGFyZ2UlMjBmb3JtYXR8ZW58MHx8MHx8fDA%3D&w=1000&q=80',
                 urlRepository: 'https://github.com/alienigena264/chazaUNApp',
                 description:
-                    'Esta es una aplicacion para la universidad nacional de colombia, en la cual se puede ver el horario de clases, el horario de los buses, el mapa de la universidad, entre otras cosas',
+                    'This is an application for the National University of Colombia, in which you can see the class schedule, the bus schedule, the map of the university, among other things.',
                 idVideo: 'uyS-WL_ln84',
                 technologies: ['Flutter', 'FireStore'],
               ),
@@ -43,7 +43,7 @@ class ProyectsView extends StatelessWidget {
                     'https://images.unsplash.com/photo-1490730141103-6cac27aaab94?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZnJlZXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80',
                 urlRepository: 'https://github.com/alienigena264/DashBoardWeb',
                 description:
-                    'Panel de administracion de multiples valores que corresponde a la logistica de la empresa',
+                    'Administration panel of multiple values that corresponds to the logistics of the company',
                 idVideo: '1wC8z_UlLGI',
                 technologies: ['Flutter Web'],
               ),
@@ -53,7 +53,7 @@ class ProyectsView extends StatelessWidget {
                     'https://images.unsplash.com/photo-1550330562-b055aa030d73?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bGFyZ2UlMjBmb3JtYXR8ZW58MHx8MHx8fDA%3D&w=1000&q=80',
                 urlRepository: 'https://github.com/alienigena264/Mr.Garcia',
                 description:
-                    'Es la aplicacion para una barberia en la que se pueden ver todas las sedes del negocio y agendar citas en horarios especificos',
+                    'It is the application for a barbershop in which you can see all the business locations and schedule appointments at specific times',
                 idVideo: 'E6k179JEUzI',
                 technologies: [],
               ),
@@ -63,7 +63,7 @@ class ProyectsView extends StatelessWidget {
                     'https://images.unsplash.com/photo-1490730141103-6cac27aaab94?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZnJlZXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80',
                 urlRepository: 'https://github.com/alienigena264/Angular',
                 description:
-                    'Esta es una aplicacion para la universidad nacional de colombia, en la cual se puede ver el horario de clases, el horario de los buses, el mapa de la universidad, entre otras cosas',
+                    'This is an application for the National University of Colombia, in which you can see the class schedule, the bus schedule, the map of the university, among other things.',
                 idVideo: 'SG3dSWd5t6c',
                 technologies: ['Flutter', 'Angular'],
               ),

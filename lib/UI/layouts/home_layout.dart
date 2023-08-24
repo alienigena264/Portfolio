@@ -134,7 +134,6 @@ class HomeLayoutState extends State<HomeLayout> {
                                     true; // Solo establecer showActions en true en pantallas grandes.
                               }
                               showAnimatedCV = false; // Ocultar la animación.
-                              print('das');
                             });
                           },
                           child: showAnimatedCV
@@ -210,7 +209,7 @@ class HomeLayoutState extends State<HomeLayout> {
         });
       },
       child: showAnimatedProyects
-          ? ZoomIn(
+          ? FadeInUp(
               duration: const Duration(milliseconds: 400),
               child: const ProyectsView(
                 opacity: 1,
@@ -279,7 +278,6 @@ class _AppBarButtoms extends StatelessWidget {
   Widget build(BuildContext context) {
     return MouseRegion(
       onEnter: (_) => {
-        print('enter'),
       },
       child: TextButton(
         style: ButtonStyle(
